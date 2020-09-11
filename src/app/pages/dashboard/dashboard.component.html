@@ -1,0 +1,31 @@
+<div class="my-3 p-3 bg-white rounded box-shadow">
+    <h6 class="border-bottom border-gray pb-2 mb-0">Interfaces activas</h6>      
+    <app-item *ngFor="let item of interfaces.stdout" [data]="item"></app-item>
+    <small class="d-block text-right mt-3">
+      <a (click)="getInterfaces()">recargar</a>
+    </small>
+</div>
+
+<div class="my-3 p-3 bg-white rounded box-shadow">
+    <h6 class="border-bottom border-gray pb-2 mb-0">Reglas Activas INPUT</h6>
+    <app-item *ngFor="let item of rules.stdout" (deletes)="updatePart()" [data]="item" [type]="'INPUT'"></app-item>
+    <small class="d-block text-right mt-3">
+      <a (click)="getRules()">recargar</a>
+    </small>
+</div>
+
+<div class="my-3 p-3 bg-white rounded box-shadow">
+  <h6 class="border-bottom border-gray pb-2 mb-0">Reglas Activas OUTPUT</h6>
+  <app-item *ngFor="let item of rulesOut.stdout" (deletes)="updatePart()" [data]="item" [type]="'OUTPUT'"></app-item>
+  <small class="d-block text-right mt-3">
+    <a (click)="getRules()">recargar</a>
+  </small>
+</div>
+
+<div class="my-3 p-3 bg-white rounded box-shadow">
+  <h6 class="border-bottom border-gray pb-2 mb-0">Reglas Activas FORWARE</h6>
+  <app-item *ngFor="let item of rulesFor.stdout" (deletes)="updatePart()" [data]="item" [type]="'FORWARE'"></app-item>
+  <small class="d-block text-right mt-3">
+    <a (click)="getRules()">recargar</a>
+  </small>
+</div>

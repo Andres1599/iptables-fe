@@ -1,0 +1,86 @@
+<div class="my-3 p-3 bg-white rounded box-shadow">
+    <h6 class="border-bottom border-gray pb-2 mb-0">Editar regla</h6>
+    <form class="my-3 p-3" [formGroup]="form">
+        <div class="row">
+            <div class="col-md-2 col-sm-2">
+                <mat-form-field>
+                    <mat-label>Chain</mat-label>
+                    <mat-select 
+                    formControlName="chain" 
+                    [disabled]="true" 
+                    [compareWith]="compare"
+                    [(ngModel)]="chain">
+                      <mat-option value="INPUT">INPUT</mat-option>
+                      <mat-option value="FORWARD">FORWARD</mat-option>
+                      <mat-option value="OUTPUT">OUTPUT</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <mat-form-field>
+                    <mat-label>Protocol</mat-label>
+                    <mat-select formControlName="protocol">
+                      <mat-option value="tcp">tcp</mat-option>
+                      <mat-option value="udp">udp</mat-option>                      
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Ports</mat-label>
+                    <input matInput placeholder="8080,443,4200" type="text" formControlName="ports">
+                </mat-form-field>
+                <small>
+                    coloca los puertos separados por comas.
+                </small>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <mat-form-field>
+                    <mat-label>Destino</mat-label>
+                    <mat-select formControlName="destino">
+                      <mat-option value="ACCEPT">ACCEPT</mat-option>
+                      <mat-option value="DROP">DROP</mat-option>
+                      <mat-option value="QUEUE">QUEUE</mat-option>
+                      <mat-option value="RETURN">RETURN</mat-option>
+                      <mat-option value="REJECT">REJECT</mat-option>
+                      <mat-option value="LOG">LOG</mat-option>
+                      <mat-option value="ULOG">ULOG</mat-option>
+                      <mat-option value="DNAT">DNAT</mat-option>
+                      <mat-option value="SNAT">SNAT</mat-option>
+                      <mat-option value="MASQUERADE">MASQUERADE</mat-option>                 
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <mat-form-field>
+                    <mat-label>Interfas</mat-label>
+                    <mat-select formControlName="interfas">
+                      <mat-option *ngFor="let item of interfaces.stdout" [value]="item">{{item}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <mat-form-field>
+                    <mat-label>Origen</mat-label>   
+                    <input matInput placeholder="192.169.0.1" type="text" formControlName="origen">
+                </mat-form-field>
+                <small>
+                    Ingresa la direccion del trafico de origen
+                </small>
+            </div>
+        </div>
+    </form>
+    <small class="d-block text-right mt-3">
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle  (click)="goToDashboard()">Cancelar</mat-button-toggle>
+            <mat-button-toggle (click)="editRule()">Agregar</mat-button-toggle>
+          </mat-button-toggle-group> 
+    </small>
+    <br>
+    <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="showMessageSuccess" (click)="!showMessageSuccess">
+        Se a actualizado correctamente la regla
+    </div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="showMessageError" (click)="!showMessageError">
+        Error al actualizar la regla
+    </div>
+</div>
